@@ -8,15 +8,18 @@ AP Computer Science A GRASPS assignment
 ### Goal
 
 Create a strategic game in Java programming language that simulates Battleship on the sea. (Using LIBGDX or a similar framework is fine.)
+  
 
 ### Role
 
 You are a developer, cooperating in the project of game creation. You work in pairs, maximum is three persons with a clear division of roles. Everyone is writing some part of the code. Everyone understands the partner’s part.
+  
 
 ### Audience
 
 Students, people interested in gaming, or training their strategy techniques.
-
+  
+  
 ### Situation
 
 Here are a couple of challenges to solve:
@@ -28,7 +31,8 @@ Version A) You create a java program that offers the game human vs the computer 
 Version B) You create a java program that links two players on the same network and they play against each other.
 
 The biggest challenge is to find an algorithm for PC to find Human ships.
-
+  
+  
 ### Product
 
 - The game has either one grid or two grids with hidden ships. When one player is playing another is waiting. The program should call who should move.
@@ -55,7 +59,8 @@ The biggest challenge is to find an algorithm for PC to find Human ships.
 - The winner is the one who destroyed the opponent’s ships as first.
 
 ### Standards/Criteria
-
+  
+  
 Your product must meet the following standard (quality):
 
 - [ ] Created documentation with description of game/picture, documented main parts, the definition of team roles. (all together max. 2 pages A4 format) Satisfactory cooperation and division of team roles.
