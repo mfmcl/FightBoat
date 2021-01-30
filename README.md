@@ -37,21 +37,14 @@ The biggest challenge is to find an algorithm for PC to find Human ships.
 
 - You can use Arrays to store data about ships. E.g. 8x8 grid
 
-0 0 3 3 3 0 0 0
-
-5 4 0 0 0 3 0 0
-
-5 4 0 0 0 3 0 0
-
-5 4 0 0 0 3 0 0
-
-5 4 0 0 0 0 0 0
-
-5 0 0 0 0 0 0 0
-
-0 0 0 0 0 0 0 0
-
-0 0 0 0 0 0 2 2
+0 0 3 3 3 0 0 0  
+5 4 0 0 0 3 0 0  
+5 4 0 0 0 3 0 0  
+5 4 0 0 0 3 0 0  
+5 4 0 0 0 0 0 0  
+5 0 0 0 0 0 0 0  
+0 0 0 0 0 0 0 0  
+0 0 0 0 0 0 2 2  
 
 - In Version, Human vs PC PC will randomly set 5 ships with different sizes for himself and Player. The player tries to hit the computer’s ships. The computer answers “hit” or “miss”. Computer displays matrix after each move with hits and misses and time.
 
@@ -65,18 +58,18 @@ The biggest challenge is to find an algorithm for PC to find Human ships.
 
 Your product must meet the following standard (quality):
 
-- [] Created documentation with description of game/picture, documented main parts, the definition of team roles. (all together max. 2 pages A4 format) Satisfactory cooperation and division of team roles.
+- [ ] Created documentation with description of game/picture, documented main parts, the definition of team roles. (all together max. 2 pages A4 format) Satisfactory cooperation and division of team roles.
 
-- [] A reasonable description of all methods within the source code
+- [ ] A reasonable description of all methods within the source code
 
-- [] Using OOP (inheritance, interface, super, this, mutator, accessor) all of these are used reasonably
+- [ ] Using OOP (inheritance, interface, super, this, mutator, accessor) all of these are used reasonably
 
-- [] Proper usage of access modifiers and static keywords
+- [ ] Proper usage of access modifiers and static keywords
 
-- [] Working solution
+- [ ] Working solution
 
-- [] Working re-shuffling method
+- [ ] Working re-shuffling method
 
-- [] Reasonable division of classes into files/folders
+- [ ] Reasonable division of classes into files/folders
 
-- [] Create one runnable jar file stored on Github. Shared link with the teach
+- [ ] Create one runnable jar file stored on Github. Shared link with the teach
