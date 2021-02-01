@@ -1,4 +1,4 @@
-package medley.GRASP04.src;
+package Fightboat.src;
 
 public class Main {
     public static void main(String[] args) {
