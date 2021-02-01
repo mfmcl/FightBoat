@@ -1,5 +1,5 @@
 # FightBoat
-AP Computer Science A GRASPS assignment
+AP Computer Science A GRASPS assignment  
 *by mfmcl and NikolaDatkova*
 
 ## GRASPS Task Battleship game
