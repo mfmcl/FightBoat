@@ -1,6 +1,6 @@
 # FightBoat
 AP Computer Science A GRASPS assignment
-
+*by mfmcl and NikolaDatkova*
 
 ## GRASPS Task Battleship game
 (together with the Unit of Classes & design of programs)
