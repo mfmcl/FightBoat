@@ -1,5 +1,3 @@
-HI MICHAEL
-
 # FightBoat
 AP Computer Science A GRASPS assignment  
 *by mfmcl and NikolaDatkova*
