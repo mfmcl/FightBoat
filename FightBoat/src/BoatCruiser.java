@@ -1,1 +1,1 @@
-package Fightboat.src;
+package FightBoat.src;

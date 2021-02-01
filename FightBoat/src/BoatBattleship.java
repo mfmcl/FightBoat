@@ -1,4 +1,4 @@
-package Fightboat.src;
+package FightBoat.src;
 
 public class BoatBattleship {
     
