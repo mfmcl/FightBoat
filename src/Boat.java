@@ -8,15 +8,15 @@ public class Boat {
         boolean placed = false;
     }
 
-    public void placeBoat()
+    public void placeBoat(Grid grid, int x, int y)
     {
-        
+        grid.getSquare(x, y) = true;
         placed = true;
     }
 
-    public void getSunk()
+    public void getSunk(Grid grid)
     {
-
+        grid.getSquare() = false;
     }
 
 }
