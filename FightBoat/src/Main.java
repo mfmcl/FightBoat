@@ -1,6 +1,16 @@
 package FightBoat.src;
 
+import javax.swing.*;
 public class Main {
+
+    public static void createWindow() {   
+        JFrame frame = new JFrame("FightBoat");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     public static void main(String[] args) {
         Grid testGrid = new Grid(8);
         testGrid.printGrid();
@@ -26,5 +36,10 @@ public class Main {
         System.out.println(testBB.allBoat);
         System.out.println(testBB.someBoat);
 
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createWindow();
+            }
+        });
     }
 }
