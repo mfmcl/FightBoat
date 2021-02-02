@@ -14,12 +14,12 @@ public class BoatBattleship extends Boat {
         this.horizontal = horizontal;
 
         if (horizontal) {
-            bb_1 = grid.getSquare(xInitial, yInitial);
+            this.bb_1 = grid.getSquare(xInitial, yInitial);
             bb_2 = grid.getSquare(xInitial + 1, yInitial);
             bb_3 = grid.getSquare(xInitial + 2, yInitial);
             bb_4 = grid.getSquare(xInitial + 3, yInitial);
         } else if (!horizontal) {
-            bb_1 = grid.getSquare(xInitial, yInitial);
+            this.bb_1 = grid.getSquare(xInitial, yInitial);
             bb_2 = grid.getSquare(xInitial, yInitial + 1);
             bb_3 = grid.getSquare(xInitial, yInitial + 2);
             bb_4 = grid.getSquare(xInitial, yInitial + 3);
@@ -35,6 +35,7 @@ public class BoatBattleship extends Boat {
                 if (horizontal) {
                     for (int i = 0; i < 4; i++) {
                         grid.toggleSquare((xInitial + i), yInitial);
+                        bb_1 = true;
                     }
                     placed = true;
                 }
