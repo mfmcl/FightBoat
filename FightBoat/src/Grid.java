@@ -17,6 +17,11 @@ public class Grid {
         grid[x][y] = !(grid[x][y]);
     }
 
+    public boolean checkFree(int x, int y)
+    {
+        return !(grid[x][y]);
+    }
+
     public boolean getSquare(int x, int y) {
         return grid[x][y];
     }
