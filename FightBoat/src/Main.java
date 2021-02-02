@@ -16,25 +16,12 @@ public class Main {
         testGrid.printGrid();
         System.out.println("");
 
-        Boat testBoat = new Boat(testGrid, 0, 3, false);
-        testBoat.placeBoat();
-        testGrid.printGrid();
-        System.out.println("");
-
-        BoatBattleship testBB = new BoatBattleship(testGrid, 4, 4, true);
+        BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
         testBB.placeBoat();
         testGrid.printGrid();
         System.out.println("");
 
-        System.out.println(testBB.allBoat);
-        System.out.println(testBB.someBoat);
-
-        testBB.sink(testGrid, 4, 4);
-
-        testGrid.printGrid();
-        System.out.println("");
-        System.out.println(testBB.allBoat);
-        System.out.println(testBB.someBoat);
+        System.out.println(testBB.bb_1);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {

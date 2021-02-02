@@ -24,37 +24,32 @@ public class BoatBattleship extends Boat {
             bb_3 = grid.getSquare(xInitial, yInitial + 2);
             bb_4 = grid.getSquare(xInitial, yInitial + 3);
         }
-        allBoat = bb_1 && bb_2 && bb_3 && bb_4;
-        someBoat = bb_1 || bb_2 || bb_3 || bb_4;
+        allBoat = !(bb_1) && !(bb_2) && !(bb_3) && !(bb_4);
+        someBoat = !(bb_1) || !(bb_2) || !(bb_3) || !(bb_4);
     }
 
     @Override
     public void placeBoat() {
         if (!placed) {
-            if (horizontal) {
-                if (allBoat) {
+            if (allBoat) {
+                if (horizontal) {
                     for (int i = 0; i < 4; i++) {
                         grid.toggleSquare((xInitial + i), yInitial);
                     }
                     placed = true;
                 }
-            } else if (!horizontal) {
-                if (allBoat) {
-                    for (int i = 0; i < 4; i++) {
-                        grid.toggleSquare((xInitial), yInitial + i);
-                    }
-                    placed = true;
+                else if (!horizontal) {
+                for (int i = 0; i < 4; i++) {
+                    grid.toggleSquare((xInitial), yInitial + i);
                 }
+                placed = true;
             }
+        }
         }
     }
 
     @Override
     public boolean checkBoat() {
-        System.out.println(bb_1);
-        System.out.println(bb_2);
-        System.out.println(bb_3);
-        System.out.println(bb_4);
         return someBoat;
     }
 }
