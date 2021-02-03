@@ -1,21 +1,21 @@
 package FightBoat.src;
 
+import java.awt.EventQueue;
+
 public class Main {
+
+    public static Grid testGrid = new Grid(10);
+    // public static BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
 
     public static void main(String[] args) {
         
-        Grid testGrid = new Grid(8);
-        testGrid.printGrid();
-        System.out.println("");
+        EventQueue.invokeLater(new Runnable() {
 
-        BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
-        testBB.placeBoat();
+            @Override
+            public void run() {
+                new GUI().display();
+            }
+        });
 
-        testGrid.printGrid();
-        System.out.println("");
-
-        System.out.println(testBB.square(0));
-
-        sc..close();
     }
 }
