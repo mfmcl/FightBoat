@@ -16,6 +16,5 @@ public class Main {
 
         System.out.println(testGrid.getSquare(0, 4));
 
-        sc..close();
     }
 }
