@@ -12,7 +12,7 @@ public class Main {
         testGrid.printGrid();
         System.out.println("");
 
-        System.out.println(testBB.square(0));
+        System.out.println(testGrid.getSquare(0, 4));
 
     }
 }
