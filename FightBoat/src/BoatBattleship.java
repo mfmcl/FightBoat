@@ -1,56 +1,40 @@
 package FightBoat.src;
 
 public class BoatBattleship extends Boat {
-    boolean placed = false;
-    boolean horizontal, allBoat, someBoat;
-    boolean bb_1, bb_2, bb_3, bb_4;
-    int xInitial, yInitial;
-    Grid grid;
 
     BoatBattleship(Grid grid, int xInitial, int yInitial, boolean horizontal) {
-        this.grid = grid;
-        this.xInitial = xInitial;
-        this.yInitial = yInitial;
-        this.horizontal = horizontal;
+        super(grid, xInitial, yInitial, horizontal);
+    }
 
-        if (horizontal) {
-            this.bb_1 = grid.getSquare(xInitial, yInitial);
-            bb_2 = grid.getSquare(xInitial + 1, yInitial);
-            bb_3 = grid.getSquare(xInitial + 2, yInitial);
-            bb_4 = grid.getSquare(xInitial + 3, yInitial);
-        } else if (!horizontal) {
-            this.bb_1 = grid.getSquare(xInitial, yInitial);
-            bb_2 = grid.getSquare(xInitial, yInitial + 1);
-            bb_3 = grid.getSquare(xInitial, yInitial + 2);
-            bb_4 = grid.getSquare(xInitial, yInitial + 3);
-        }
-        allBoat = !(bb_1) && !(bb_2) && !(bb_3) && !(bb_4);
-        someBoat = !(bb_1) || !(bb_2) || !(bb_3) || !(bb_4);
+    public boolean square(int i) {
+        if (horizontal)
+            return grid.getSquare(xInitial + i, yInitial);
+        else
+            return grid.getSquare(xInitial, yInitial + i);
+    }
+
+    public boolean allBoat() {
+        return !square(0) && !square(1) && !square(2) && !square(3);
     }
 
     @Override
     public void placeBoat() {
-        if (!placed) {
-            if (allBoat) {
-                if (horizontal) {
-                    for (int i = 0; i < 4; i++) {
-                        grid.toggleSquare((xInitial + i), yInitial);
-                        bb_1 = true;
-                    }
-                    placed = true;
-                }
-                else if (!horizontal) {
-                for (int i = 0; i < 4; i++) {
-                    grid.toggleSquare((xInitial), yInitial + i);
-                }
-                placed = true;
+        if (placed || !allBoat())
+            return;
+        if (horizontal) {
+            for (int i = 0; i < 4; i++) {
+                grid.toggleSquare((xInitial + i), yInitial);
+            }
+        } else {
+            for (int i = 0; i < 4; i++) {
+                grid.toggleSquare((xInitial), yInitial + i);
             }
         }
-        }
+        placed = true;
     }
 
     @Override
     public boolean checkBoat() {
-        return someBoat;
+        return !square(0) || !square(1) || !square(2) || !square(3);
     }
 }

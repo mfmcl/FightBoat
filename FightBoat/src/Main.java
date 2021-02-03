@@ -8,10 +8,11 @@ public class Main {
 
         BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
         testBB.placeBoat();
-        testGrid.printGrid();
-        System.out.println(""); 
 
-        System.out.println(testBB.bb_1);
+        testGrid.printGrid();
+        System.out.println("");
+
+        System.out.println(testBB.square(0));
 
     }
 }
