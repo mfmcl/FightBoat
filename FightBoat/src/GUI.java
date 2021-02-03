@@ -1,3 +1,4 @@
+package FightBoat.src;
 
 import javax.swing.*;
 
