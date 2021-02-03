@@ -1,7 +1,7 @@
 package FightBoat.src;
 
 import javax.swing.*;
-
+import java.awt.*;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,11 +14,11 @@ import javax.swing.JPanel;
 
 public class GUI {
 
-    private static final int N = 5;
+    private static final int gridSize = 10;
     private final List<JButton> list = new ArrayList<JButton>();
 
     private JButton getGridButton(int r, int c) {
-        int index = r * N + c;
+        int index = r * gridSize + c;
         return list.get(index);
     }
 
@@ -29,6 +29,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton gb = GUI.this.getGridButton(row, col);
+                ((JButton)e.getSource()).setBackground(Color.red);
                 System.out.println("r" + row + ",c" + col
                     + " " + (b == gb)
                     + " " + (b.equals(gb)));
@@ -38,10 +39,10 @@ public class GUI {
     }
 
     private JPanel createGridPanel() {
-        JPanel p = new JPanel(new GridLayout(N, N));
-        for (int i = 0; i < N * N; i++) {
-            int row = i / N;
-            int col = i % N;
+        JPanel p = new JPanel(new GridLayout(gridSize, gridSize));
+        for (int i = 0; i < gridSize * gridSize; i++) {
+            int row = i / gridSize;
+            int col = i % gridSize;
             JButton gb = createGridButton(row, col);
             list.add(gb);
             p.add(gb);
