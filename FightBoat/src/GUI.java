@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class GUI extends Main {
 
- BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
+    BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
 
     private static final int gridSize = 10;
     private final List<JButton> list = new ArrayList<JButton>();
@@ -35,12 +35,12 @@ public class GUI extends Main {
                 testBB.placeBoat();
                 for (int i = 0; i < list.size(); i++) {
                     int row = i / gridSize;
-                    int col = i % gridSize;        
+                    int col = i % gridSize;
                     getGridButton(row, col).setLabel(Boolean.toString(testGrid.getSquare(col, row)));
                 }
                 recolor();
                 System.out.println("");
-                
+
             }
         });
         return b;
@@ -70,7 +70,6 @@ public class GUI extends Main {
         f.setVisible(true);
     }
 
-
     private void recolor() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -79,12 +78,12 @@ public class GUI extends Main {
                 } else {
                     GUI.this.getGridButton(j, i).setBackground(Color.cyan);
                 }
-    
+
             }
         }
 
-
     }
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
 
