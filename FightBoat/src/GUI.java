@@ -1,6 +1,5 @@
 package FightBoat.src;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -12,7 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GUI {
+public class GUI extends Main {
+
+ BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
 
     private static final int gridSize = 10;
     private final List<JButton> list = new ArrayList<JButton>();
@@ -23,16 +24,23 @@ public class GUI {
     }
 
     private JButton createGridButton(final int row, final int col) {
-        final JButton b = new JButton("r" + row + ",c" + col);
+        String thisSquare = Boolean.toString(testGrid.getSquare(col, row));
+        final JButton b = new JButton(thisSquare);
         b.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton gb = GUI.this.getGridButton(row, col);
-                ((JButton)e.getSource()).setBackground(Color.red);
-                System.out.println("r" + row + ",c" + col
-                    + " " + (b == gb)
-                    + " " + (b.equals(gb)));
+                BoatBattleship testBB = new BoatBattleship(testGrid, col, row, true);
+                testBB.placeBoat();
+                for (int i = 0; i < list.size(); i++) {
+                    int row = i / gridSize;
+                    int col = i % gridSize;        
+                    getGridButton(row, col).setLabel(Boolean.toString(testGrid.getSquare(col, row)));
+                }
+                recolor();
+                System.out.println("");
+                
             }
         });
         return b;
@@ -47,11 +55,14 @@ public class GUI {
             list.add(gb);
             p.add(gb);
         }
+        recolor();
         return p;
     }
 
-    private void display() {
+    public void display() {
         JFrame f = new JFrame("GridButton");
+        f.setSize(200, 200);
+        f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(createGridPanel());
         f.pack();
@@ -59,6 +70,21 @@ public class GUI {
         f.setVisible(true);
     }
 
+
+    private void recolor() {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                if (testGrid.getSquare(i, j)) {
+                    GUI.this.getGridButton(j, i).setBackground(Color.gray);
+                } else {
+                    GUI.this.getGridButton(j, i).setBackground(Color.cyan);
+                }
+    
+            }
+        }
+
+
+    }
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
 
