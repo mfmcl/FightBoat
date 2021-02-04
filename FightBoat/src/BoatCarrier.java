@@ -1,29 +1,38 @@
 package FightBoat.src;
 
 public class BoatCarrier extends Boat {
-    boolean placed = false;
-    boolean horizontal;
-    int xInitial, yInitial;
-    Grid grid;
 
-    BoatCarrier(Grid grid, int xInitial, int yInitial, boolean horizontal) {
-        this.grid = grid;
-        this.xInitial = xInitial;
-        this.yInitial = yInitial;
-        this.horizontal = horizontal;
+    BoatCarrier(Grid grid, int xInitial, int yInitial) {
+        super(grid, xInitial, yInitial, false);
+    }
+
+    public boolean square(int i){ 
+        if (i<2)
+            return grid.getSquare(xInitial + i, yInitial);
+        else
+            return grid.getSquare(xInitial + (i-2), yInitial + 1);
+    }
+
+    public boolean allBoat() {
+        return !square(0) && !square(1) && !square(2) && !square(3);
     }
 
     @Override
     public void placeBoat() {
-        if (!placed) {
-            if ((grid.checkFree(xInitial, yInitial)) && (grid.checkFree(xInitial + 1, yInitial))
-                    && (grid.checkFree(xInitial, yInitial + 1)) && (grid.checkFree(xInitial + 1, yInitial + 1))) {
-                grid.toggleSquare(xInitial, yInitial);
-                grid.toggleSquare((xInitial + 1), yInitial);
-                grid.toggleSquare(xInitial, (yInitial + 1));
-                grid.toggleSquare((xInitial + 1), (yInitial + 1));
-                placed = true;
+        if (placed || !allBoat())
+            return;
+        for(int i = 0; i<2; i++)
+        {
+            for(int j = 0; j<2; j++)
+            {
+                grid.toggleSquare(xInitial+i, yInitial+j);
             }
-        }
+        }            
+        placed = true;
+    }
+
+    @Override
+    public boolean checkBoat() {
+        return !square(0) || !square(1) || !square(2) || !square(3);
     }
 }

@@ -9,13 +9,28 @@ public class Main {
 
     public static void main(String[] args) {
         
-        EventQueue.invokeLater(new Runnable() {
+        testGrid.printGrid();
+        
+        BoatBattleship bb = new BoatBattleship(testGrid, 3, 3, false);
+        bb.placeBoat();
 
-            @Override
-            public void run() {
-                new GUI().display();
-            }
-        });
+        testGrid.printGrid();
+        System.out.println(bb.allBoat());
+        
+        testGrid.printGrid();
+        bb.sink(testGrid, 3, 3);
+        
+        testGrid.printGrid();
+        System.out.println(bb.allBoat());
+
+
+        // EventQueue.invokeLater(new Runnable() {
+
+        //     @Override
+        //     public void run() {
+        //         new GUI().display();
+        //     }
+        // });
 
     }
 }
