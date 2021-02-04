@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameFace {
+public class Player {
     static JFrame frameP1 = new JFrame("Player 1");
     static JPanel panelP1 = new JPanel();
     
