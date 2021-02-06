@@ -4,19 +4,19 @@ import java.awt.EventQueue;
 
 public class Main {
 
-    public static Grid testGrid = new Grid(10);
-    // public static BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
-
     public static void main(String[] args) {
         
+        // welcome players
+        Player p1 = new Player("P1",8);
+        Player p2 = new Player("P2",8);
 
-        EventQueue.invokeLater(new Runnable() {
+        // set against each other
+        p1.setOpponent(p2);
+        p2.setOpponent(p1);
 
-            @Override
-            public void run() {
-                new GUI().display();
-            }
-        });
+        // create windows
+        p1.createGameWindow();
+        p2.createGameWindow();
 
     }
 }

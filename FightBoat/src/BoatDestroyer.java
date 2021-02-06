@@ -21,11 +21,11 @@ public class BoatDestroyer extends Boat {
         if (placed || !allBoat())
             return;
         if (horizontal) {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 2; i++) {
                 grid.toggleSquare((xInitial + i), yInitial);
             }
         } else {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 2; i++) {
                 grid.toggleSquare((xInitial), yInitial + i);
             }
         }
