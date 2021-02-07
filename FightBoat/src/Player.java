@@ -24,6 +24,7 @@ public class Player {
     Grid opponentGrid;
     ArrayList<JButton> playerListOfButtons = new ArrayList();
     ArrayList<JButton> opponentListOfButtons = new ArrayList();
+    ArrayList<Boat> listOfBoats = new ArrayList();
     BoatDestroyer dd;
     BoatCruiser cc;
     BoatBattleship bb;
@@ -46,18 +47,42 @@ public class Player {
         playerGrid = new Grid(gridSize);
         opponentGrid = new Grid(gridSize);
         this.gridSize = gridSize;
-        shipsPlaced = 0;      
+        shipsPlaced = 0;
     }
 
+    // sets opponent to our plaeyr (cannot appear in constructor, because the
+    // opponent might not yet have been created at the time the player is being
+    // created)
     public void setOpponent(Player opponent) {
         this.opponent = opponent;
     }
 
-    private JButton getGridButton(int x, int y, ArrayList<JButton> listOfWhom) {
+    // creates a button (a basic unit of the playing grid) and places it to a list
+    // of buttons for later access
+    public JButton createGridButton(final int x, final int y, ArrayList<JButton> listOfWhom) {
+        final JButton buttonOfGrid = new JButton();
+        buttonOfGrid.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                if (listOfWhom.equals(playerListOfButtons)) {
+                    getDecision(x, y);
+                } else if (listOfWhom.equals(opponentListOfButtons)) {
+                    attack(x, y);
+                }
+            }
+        });
+        return buttonOfGrid;
+    }
+
+    // for later access of a specific button in a grid
+    public JButton getGridButton(int x, int y, ArrayList<JButton> listOfWhom) {
         int index = y * gridSize + x;
         return listOfWhom.get(index);
     }
 
+    // creates a grid of buttons and assigns it to the player list of buttons for
+    // later access
     public void createPlayerGrid() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -74,6 +99,10 @@ public class Player {
         panelP.add(gridLabel1);
     }
 
+    // creates a grid of buttons and assigns it to the opponent list of buttons for
+    // later access (could admittedly be merged with the previous method, but the
+    // author chose split the two for clarity and easier usage (no need to specify
+    // extra arguments))
     public void createOpponentGrid() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -89,22 +118,8 @@ public class Player {
         panelP.add(gridLabel2);
     }
 
-    JButton createGridButton(final int x, final int y, ArrayList<JButton> listOfWhom) {
-        final JButton buttonOfGrid = new JButton();
-        buttonOfGrid.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (listOfWhom.equals(playerListOfButtons)) {
-                    getDecision(x, y);
-                } else if (listOfWhom.equals(opponentListOfButtons)) {
-                    attack(x, y);
-                }
-            }
-        });
-        return buttonOfGrid;
-    }
-
+    // asks whether a boat should be placed vertically or horizontally and places a
+    // boat (in specific order)
     public void getDecision(final int x, final int y) {
         JFrame decision = new JFrame();
         JPanel decisionP = new JPanel();
@@ -146,31 +161,38 @@ public class Player {
         decision.setVisible(true);
     }
 
+    // makes sure each player gets to place exactly four boats
     public void createAdequateBoat(Grid gridOfWhom, int x, int y, boolean horizontal) {
         switch (shipsPlaced) {
             case 0:
                 dd = new BoatDestroyer(gridOfWhom, x, y, horizontal);
                 dd.placeBoat();
+                listOfBoats.add(dd);
                 shipsPlaced++;
                 break;
             case 1:
                 cc = new BoatCruiser(gridOfWhom, x, y, horizontal);
                 cc.placeBoat();
+                listOfBoats.add(cc);
                 shipsPlaced++;
                 break;
             case 2:
                 bb = new BoatBattleship(gridOfWhom, x, y, horizontal);
                 bb.placeBoat();
+                listOfBoats.add(bb);
                 shipsPlaced++;
                 break;
             case 3:
                 cv = new BoatCarrier(gridOfWhom, x, y);
                 cv.placeBoat();
+                listOfBoats.add(cv);
                 shipsPlaced++;
                 break;
         }
     }
 
+    // checks the grids of a given player and makes sure the interface correxponds
+    // to what is happening in the code as the game progresses
     public void recolour(Grid gridOfWhom, ArrayList<JButton> listOfWhom) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -184,39 +206,34 @@ public class Player {
         }
     }
 
+    // allows a player to attack a certain square (through a button, as mentioned
+    // above)
     public void attack(int x, int y) {
         boolean wasHit = opponent.playerGrid.getSquare(x, y);
         if (wasHit) {
             opponent.playerGrid.toggleSquare(x, y);
             opponent.recolour(opponent.playerGrid, opponent.playerListOfButtons);
-            checkDamage();
             opponentGrid.toggleSquare(x, y);
             recolour(opponentGrid, opponentListOfButtons);
+            checkDamage();
         } else if (!wasHit) {
             System.out.println("not hit");
         }
     }
 
-    public void checkDamage()
-    {
-        JTextArea ribbons = new JTextArea("hi");
-        ribbons.setEditable(false);
-        ribbons.setBounds(10, 10, 100, 25);
-        if(opponent.dd.checkIfSunk())
-        {
-            JFrame destroyed = new JFrame(playerName);
-            destroyed.setBackground(Color.white);
-            destroyed.setSize(300, 200);
-            destroyed.setLocation(600, 300);
-            JPanel destroyedP = new JPanel();
-            destroyedP.setBackground(Color.white);
-            destroyedP.add(ribbons);
-            destroyed.add(destroyedP);
-            destroyedP.setLayout(null);
-            destroyed.setVisible(true);
-        }   
+    // checks if a boat has just been killed
+    public void checkDamage() {
+        for (int i = 0; i < listOfBoats.size(); i++)
+            {
+                if((listOfBoats.get(i).checkIfSunk())&&(listOfBoats.get(i).killed==false))
+                {
+                    listOfBoats.get(i).killed = true;
+                    System.out.println("you killed a ship");
+                }
+            }
     }
 
+    // creates game interface for a player
     public void createGameWindow() {
         frameP.setSize(900, 500);
         frameP.setLocation(500, 200);
