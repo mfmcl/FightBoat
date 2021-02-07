@@ -28,7 +28,7 @@ public class Boat {
         }
     }
 
-    public boolean checkBoat()
+    public boolean checkIfSunk()
     {
         return(grid.getSquare(xInitial, yInitial));
     }

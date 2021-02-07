@@ -32,7 +32,7 @@ public class BoatCarrier extends Boat {
     }
 
     @Override
-    public boolean checkBoat() {
-        return !square(0) || !square(1) || !square(2) || !square(3);
+    public boolean checkIfSunk() {
+        return !square(0) && !square(1) && !square(2) && !square(3);
     }
 }
