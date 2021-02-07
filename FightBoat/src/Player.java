@@ -92,7 +92,7 @@ public class Player {
                 panelP.add(squareButton);
             }
         }
-        recolour(playerGrid, playerListOfButtons);
+        recolor(playerGrid, playerListOfButtons);
         gridLabel1.setBounds(10, 250, 250, 25);
         instructions.setBounds(10, 275, 235, 80);
         panelP.add(instructions);
@@ -113,7 +113,7 @@ public class Player {
             }
 
         }
-        recolour(opponentGrid, opponentListOfButtons);
+        recolor(opponentGrid, opponentListOfButtons);
         gridLabel2.setBounds(400, 250, 250, 25);
         panelP.add(gridLabel2);
     }
@@ -133,7 +133,7 @@ public class Player {
             @Override
             public void actionPerformed(ActionEvent event) {
                 createAdequateBoat(playerGrid, x, y, true);
-                recolour(playerGrid, playerListOfButtons);
+                recolor(playerGrid, playerListOfButtons);
                 playerGrid.printGrid();
             }
         });
@@ -147,7 +147,7 @@ public class Player {
             @Override
             public void actionPerformed(ActionEvent event) {
                 createAdequateBoat(playerGrid, x, y, false);
-                recolour(playerGrid, playerListOfButtons);
+                recolor(playerGrid, playerListOfButtons);
                 playerGrid.printGrid();
             }
         });
@@ -193,7 +193,7 @@ public class Player {
 
     // checks the grids of a given player and makes sure the interface correxponds
     // to what is happening in the code as the game progresses
-    public void recolour(Grid gridOfWhom, ArrayList<JButton> listOfWhom) {
+    public void recolor(Grid gridOfWhom, ArrayList<JButton> listOfWhom) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 if (gridOfWhom.getSquare(j, i)) {
@@ -212,9 +212,9 @@ public class Player {
         boolean wasHit = opponent.playerGrid.getSquare(x, y);
         if (wasHit) {
             opponent.playerGrid.toggleSquare(x, y);
-            opponent.recolour(opponent.playerGrid, opponent.playerListOfButtons);
+            opponent.recolor(opponent.playerGrid, opponent.playerListOfButtons);
             opponentGrid.toggleSquare(x, y);
-            recolour(opponentGrid, opponentListOfButtons);
+            recolor(opponentGrid, opponentListOfButtons);
             checkDamage();
         } else if (!wasHit) {
             System.out.println("not hit");
