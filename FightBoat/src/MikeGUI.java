@@ -20,6 +20,11 @@ public class MikeGUI {
     static JPanel panelP2 = new JPanel(); // panel for player 2
     static JPanel gamePanel = new JPanel(); // panel for game messsages
 
+    private static final int gridSize = 10;
+
+    public static void CreateBoardInPanel() {
+        
+    }
 
     public static void addComponentsToPane(Container f) {
         
