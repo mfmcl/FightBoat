@@ -17,5 +17,6 @@ public class Main {
         // create windows
         p1.createGameWindow();
         p2.createGameWindow();
+
     }
 }
