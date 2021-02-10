@@ -14,7 +14,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MikeGUI {
+public class xMikeGUI {
     static JPanel container = new JPanel();
     static JPanel panelP1 = new JPanel(); // panel for player 1
     static JPanel panelP2 = new JPanel(); // panel for player 2
@@ -23,11 +23,11 @@ public class MikeGUI {
     private static final int gridSize = 10;
 
     public static void CreateBoardInPanel() {
-        
+
     }
 
     public static void addComponentsToPane(Container f) {
-        
+
         // container.setLayout(new BorderLayout());
 
         panelP1.setPreferredSize(new Dimension(400, 400));
@@ -37,7 +37,7 @@ public class MikeGUI {
         gamePanel.setPreferredSize(new Dimension(400, 400));
         gamePanel.setBackground(Color.green);
         f.add(gamePanel, BorderLayout.CENTER);
-       
+
         panelP2.setPreferredSize(new Dimension(400, 400));
         panelP2.setBackground(Color.blue);
         f.add(panelP2, BorderLayout.LINE_END);
@@ -59,13 +59,12 @@ public class MikeGUI {
         // add components
         addComponentsToPane(f.getContentPane());
 
-        // create and add 
-        
+        // create and add
+
         // display window
         f.pack();
         f.setVisible(true);
     }
-
 
     public static void main(String[] args) {
         createAndShowGUI();

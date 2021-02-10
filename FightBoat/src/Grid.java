@@ -1,7 +1,7 @@
 package FightBoat.src;
 
 public class Grid {
-    
+
     private boolean[][] grid;
 
     public Grid(int gridSize) {
@@ -17,8 +17,7 @@ public class Grid {
         grid[x][y] = !(grid[x][y]);
     }
 
-    public boolean checkFree(int x, int y)
-    {
+    public boolean checkFree(int x, int y) {
         return !(grid[x][y]);
     }
 
@@ -41,7 +40,7 @@ public class Grid {
             }
             System.out.println();
         }
-        System.out.println("");
+        System.out.println();
     }
 
 }

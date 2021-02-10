@@ -2,13 +2,15 @@ package FightBoat.src;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -33,21 +35,21 @@ public class Player {
     int boatsPlaced;
     Player opponent;
 
-    Player(String playerName, int gridSize) {
+    public Player(String playerName, int gridSize) {
         this.playerName = playerName;
         this.gridSize = gridSize;
-        
+
         frame = new JFrame(playerName);
         panel = new JPanel();
         panel.setBackground(Color.white);
-        
+
         gridLabel1 = new JLabel("Your field");
         gridLabel2 = new JLabel("Opponent's field");
-        
+
         instructions = new JTextArea(
                 " 1. Place your destroyer (2x1)\n 2. Place your cruiser (3x1)\n 3. Place your battleship (4x1)\n 4. Place your aircraft carrier (2x2)");
         instructions.setEditable(false);
-        
+
         playerGrid = new Grid(gridSize);
         opponentGrid = new Grid(gridSize);
         boatsPlaced = 0;
@@ -103,7 +105,8 @@ public class Player {
     }
 
     // creates a grid of buttons and assigns it to the opponent list of buttons for
-    // later acruiseress (could admittedly be merged with the previous method, but the
+    // later acruiseress (could admittedly be merged with the previous method, but
+    // the
     // author chose split the two for clarity and easier usage (no need to specify
     // extra arguments))
     public void createOpponentGrid() {
@@ -226,12 +229,12 @@ public class Player {
         }
     }
 
-    // checks if a boat has just been killed
+    // checks if a boat has just been sunk
     public void checkDamage() {
         for (int i = 0; i < listOfBoats.size(); i++) {
-            if ((listOfBoats.get(i).checkIfSunk()) && !(listOfBoats.get(i).killed)) {
-                listOfBoats.get(i).killed = true;
-                System.out.println("you killed a ship");
+            if ((listOfBoats.get(i).checkIfSunk()) && !(listOfBoats.get(i).sunk)) {
+                listOfBoats.get(i).sunk = true;
+                System.out.println("you sunk a ship");
             }
         }
     }

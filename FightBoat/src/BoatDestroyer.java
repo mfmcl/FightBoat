@@ -1,17 +1,12 @@
 package FightBoat.src;
 
 public class BoatDestroyer extends Boat {
+
     BoatDestroyer(Grid grid, int xInitial, int yInitial, boolean horizontal) {
         super(grid, xInitial, yInitial, horizontal);
     }
 
-    public boolean square(int i) {
-        if (horizontal)
-            return grid.getSquare(xInitial + i, yInitial);
-        else
-            return grid.getSquare(xInitial, yInitial + i);
-    }
-
+    // true if all squares for placing boat are false
     public boolean allBoat() {
         return !square(0) && !square(1);
     }
@@ -32,8 +27,7 @@ public class BoatDestroyer extends Boat {
     }
 
     @Override
-    public boolean checkIfSunk()
-    {
+    public boolean checkIfSunk() {
         return !square(0) && !square(1);
     }
 }

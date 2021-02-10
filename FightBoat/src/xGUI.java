@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GUI extends Main {
+public class xGUI extends Main {
 
     BoatBattleship testBB = new BoatBattleship(testGrid, 0, 3, true);
 
@@ -30,7 +30,7 @@ public class GUI extends Main {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton gb = GUI.this.getGridButton(row, col);
+                JButton gb = xGUI.this.getGridButton(row, col);
                 BoatBattleship testBB = new BoatBattleship(testGrid, col, row, true);
                 testBB.placeBoat();
                 for (int i = 0; i < list.size(); i++) {
@@ -74,9 +74,9 @@ public class GUI extends Main {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 if (testGrid.getSquare(i, j)) {
-                    GUI.this.getGridButton(j, i).setBackground(Color.gray);
+                    xGUI.this.getGridButton(j, i).setBackground(Color.gray);
                 } else {
-                    GUI.this.getGridButton(j, i).setBackground(Color.cyan);
+                    xGUI.this.getGridButton(j, i).setBackground(Color.cyan);
                 }
 
             }
@@ -89,7 +89,7 @@ public class GUI extends Main {
 
             @Override
             public void run() {
-                new GUI().display();
+                new xGUI().display();
             }
         });
     }
