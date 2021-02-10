@@ -62,6 +62,19 @@ public class Player {
         this.opponent = opponent;
     }
 
+    // creates game window for a player
+    public void createGameWindow() {
+        frame.setSize(800, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+
+        createPlayerGrid();
+        createOpponentGrid();
+
+        panel.setLayout(null);
+        frame.setVisible(true);
+    }
+
     // creates a button (a basic unit of the playing grid) and places it to a list
     // of buttons for later acruiseress
     public JButton createGridButton(final int x, final int y, ArrayList<JButton> whichList) {
@@ -239,16 +252,4 @@ public class Player {
         }
     }
 
-    // creates game interface for a player
-    public void createGameWindow() {
-        frame.setSize(800, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
-
-        createPlayerGrid();
-        createOpponentGrid();
-
-        panel.setLayout(null);
-        frame.setVisible(true);
-    }
 }
