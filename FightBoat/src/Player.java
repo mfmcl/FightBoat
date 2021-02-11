@@ -46,14 +46,16 @@ public class Player {
         boatsPlaced = 0;
     }
 
-    // sets opponent to our plaeyr (cannot appear in constructor, because the
-    // opponent might not yet have been created at the time the player is being
-    // created)
+    // sets opponent to our plaeyr
+    // NOTE: cannot appear in constructor, because the opponent might
+    // not yet have been created at the time the player is being created
     public void setOpponent(Player opponent) {
         this.opponent = opponent;
     }
 
     // creates game window for a player
+    // contains two grids - one for placing boats and one for attacking
+    // displays score and instructions for placing boats
     public void createGameWindow() {
         frame = new JFrame(playerName);
         panel = new JPanel();
@@ -104,14 +106,17 @@ public class Player {
         return buttonOfGrid;
     }
 
-    // for later acruiseress of a specific button in a grid
+    // returns button at specific coordinates from specific grid
     public JButton getGridButton(int x, int y, ArrayList<JButton> whichList) {
         int index = y * gridSize + x;
         return whichList.get(index);
     }
 
-    // creates a grid of buttons and assigns it to the player list of buttons for
-    // later acruiseress
+    // creates a grid of buttons and assigns them to this player
+    // adds buttons to list for easier access
+    // separate from createOpponentGrid() for sake of clarity and easier usage
+    // (no need to specify extra arguments)
+
     public void createPlayerGrid() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -128,11 +133,10 @@ public class Player {
         panel.add(gridLabel1);
     }
 
-    // creates a grid of buttons and assigns it to the opponent list of buttons for
-    // later acruiseress (could admittedly be merged with the previous method, but
-    // the
-    // author chose split the two for clarity and easier usage (no need to specify
-    // extra arguments))
+    // creates a grid of buttons and assigns them to opponent
+    // adds buttons to list for easier access
+    // separate from createPlayerGrid() for sake of clarity and easier usage
+    // (no need to specify extra arguments)
     public void createOpponentGrid() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -148,47 +152,55 @@ public class Player {
         panel.add(gridLabel2);
     }
 
-    // asks whether a boat should be placed vertically or horizontally and places a
-    // boat (in specific order)
+    // asks player whether to place boat horizontally or vertically
+    // TODO: make JOptionPane or replace with toggle in main window
     public void getDecision(final int x, final int y) {
-        JFrame decision = new JFrame();
-        JPanel decisionP = new JPanel();
-        JLabel decisionL = new JLabel("How would you like to place your ship?");
-
-        JButton horizontally = new JButton("Horizontally");
-        horizontally.setBounds(10, 40, 120, 25);
-        decisionP.add(horizontally);
-        horizontally.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                createCorrectBoat(playerGrid, x, y, true);
-                recolor(playerGrid, playerListOfButtons);
-                playerGrid.printGrid();
-            }
-        });
-
-        JButton vertically = new JButton("Vertically");
-        vertically.setBounds(150, 40, 120, 25);
-        decisionP.add(vertically);
-
-        vertically.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                createCorrectBoat(playerGrid, x, y, false);
-                recolor(playerGrid, playerListOfButtons);
-                playerGrid.printGrid();
-            }
-        });
-
-        decisionL.setBounds(10, 10, 250, 25);
-        decisionP.add(decisionL);
-        decision.setSize(300, 200);
-        decision.setLocation(600, 300);
-        decision.add(decisionP);
-        decisionP.setLayout(null);
-        decision.setVisible(true);
+        if (boatsPlaced < 3) {
+            JFrame decision = new JFrame();
+            JPanel decisionP = new JPanel();
+            JLabel decisionL = new JLabel("How would you like to place your ship?");
+    
+            JButton horizontally = new JButton("Horizontally");
+            horizontally.setBounds(10, 40, 120, 25);
+            decisionP.add(horizontally);
+            horizontally.addActionListener(new ActionListener() {
+    
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    createCorrectBoat(playerGrid, x, y, true);
+                    recolor(playerGrid, playerListOfButtons);
+                    playerGrid.printGrid();
+                    decision.dispose();
+                }
+            });
+    
+            JButton vertically = new JButton("Vertically");
+            vertically.setBounds(150, 40, 120, 25);
+            decisionP.add(vertically);
+    
+            vertically.addActionListener(new ActionListener() {
+    
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    createCorrectBoat(playerGrid, x, y, false);
+                    recolor(playerGrid, playerListOfButtons);
+                    playerGrid.printGrid();
+                    decision.dispose();
+                }
+            });
+    
+            decisionL.setBounds(10, 10, 250, 25);
+            decisionP.add(decisionL);
+            decision.setSize(300, 120);
+            decision.setLocation(600, 300);
+            decision.add(decisionP);
+            decisionP.setLayout(null);
+            decision.setVisible(true);
+        } else {
+            createCorrectBoat(playerGrid, x, y, true);
+            recolor(playerGrid, playerListOfButtons);
+            playerGrid.printGrid();
+        }
     }
 
     // places correct type of boat based on current number of placed boats
@@ -223,8 +235,7 @@ public class Player {
         }
     }
 
-    // checks the grids of a given player and makes sure the interface correxponds
-    // to what is happening in the code as the game progresses
+    // changes grid button colors based on their values (legend in class FightBoat)
     // TODO: could be a switch
     public void recolor(Grid whichGrid, ArrayList<JButton> whichList) {
         for (int i = 0; i < gridSize; i++) {
@@ -269,6 +280,7 @@ public class Player {
     }
 
     // checks if a boat has just been sunk
+    // TODO: set sunk boat values to 9 to make it clearer to player that a boat has been sunk
     public void checkDamage() {
         for (int i = 0; i < listOfBoats.size(); i++) {
             if (listOfBoats.get(i).checkIfSunk() && !(listOfBoats.get(i).sunk)) {
