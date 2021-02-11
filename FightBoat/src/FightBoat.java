@@ -1,6 +1,30 @@
+/**
+ * FightBoat v1.0
+ *  
+ * by mfmcl and NikolaDatkova
+ * 
+ * AP CS A GRASPS Project
+ * 
+ * Simple battleship clone
+ * 
+ * Updated Feb 11 2021
+ * 
+ * 
+ * 
+ * Square value legend:
+ * 0 - empty square
+ * 2 - destroyer 2x1
+ * 3 - cruiser 3x1
+ * 4 - battleship 4x1
+ * 5 - carrier 2x2
+ * 6 - square hit
+ * 7 - square miss
+ * 9 - sunken boat (not implemented)
+ */
+
 package FightBoat.src;
 
-public class Main {
+public class FightBoat {
 
     public static void main(String[] args) {
 

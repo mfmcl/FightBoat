@@ -53,7 +53,7 @@ public class Boat {
         }
     }
 
-    // checks if a boat is sunk (a bot is sunk if value of all boat squares is 9)
+    // checks if a boat is sunk (a bot is sunk if value of all boat squares is 6)
     public boolean checkIfSunk() {
         // defined separately for each boat type
         return false;

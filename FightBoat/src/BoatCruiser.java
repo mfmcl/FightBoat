@@ -8,12 +8,13 @@ public class BoatCruiser extends Boat {
     }
 
     @Override
-    // true if all squares for placing boat are false
+    // true if values of all squares for placing boat are 0
     public boolean allBoat() {
         return square(0) == 0 && square(1) == 0 && square(2) == 0;
     }
 
     @Override
+    // true if values of all boat squares are 6
     public boolean checkIfSunk() {
         return square(0) == 6 && square(1) == 6 && square(2) == 6;
     }

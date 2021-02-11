@@ -225,6 +225,7 @@ public class Player {
 
     // checks the grids of a given player and makes sure the interface correxponds
     // to what is happening in the code as the game progresses
+    // TODO: could be a switch
     public void recolor(Grid whichGrid, ArrayList<JButton> whichList) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -244,8 +245,8 @@ public class Player {
         }
     }
 
-    // allows a player to attack a certain square (through a button, as mentioned
-    // above)
+    // attacks selected square.
+    // if hit, value of square set to 6. If miss, value of square set to 7
     public void attack(int x, int y) {
         boolean wasHit = !(opponent.playerGrid.getSquare(x, y) == 0 || opponent.playerGrid.getSquare(x, y) == 6);
         if (wasHit) {
