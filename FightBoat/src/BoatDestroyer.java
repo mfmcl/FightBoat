@@ -4,6 +4,7 @@ public class BoatDestroyer extends Boat {
 
     BoatDestroyer(Grid grid, int xInitial, int yInitial, boolean horizontal) {
         super(grid, xInitial, yInitial, horizontal);
+        boatSize = 2;
     }
 
     // true if all squares for placing boat are false
@@ -28,6 +29,6 @@ public class BoatDestroyer extends Boat {
 
     @Override
     public boolean checkIfSunk() {
-        return !square(0) && !square(1);
+        return (!(square(0)) && !(square(1)));
     }
 }

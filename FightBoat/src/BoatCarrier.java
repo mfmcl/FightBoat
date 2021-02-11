@@ -4,6 +4,7 @@ public class BoatCarrier extends Boat {
 
     BoatCarrier(Grid grid, int xInitial, int yInitial) {
         super(grid, xInitial, yInitial, false);
+        boatSize = 4;
     }
 
     @Override

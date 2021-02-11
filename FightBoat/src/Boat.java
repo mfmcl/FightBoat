@@ -4,6 +4,8 @@ public class Boat {
     Grid grid;
     int xInitial;
     int yInitial;
+    int boatSize;
+    int numHits = 0;
     boolean horizontal;
     boolean placed = false;
     boolean sunk = false;
@@ -33,6 +35,10 @@ public class Boat {
 
     // checks if a boat sunk (if all boat squares are false, a boat is sunk)
     public boolean checkIfSunk() {
-        return (!grid.getSquare(xInitial, yInitial));
+        return (!(grid.getSquare(xInitial, yInitial)));
+    }
+
+    public void setSunk() {
+        sunk = true;
     }
 }

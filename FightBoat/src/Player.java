@@ -26,6 +26,7 @@ public class Player {
     ArrayList<JButton> playerListOfButtons = new ArrayList();
     ArrayList<JButton> opponentListOfButtons = new ArrayList();
     ArrayList<Boat> listOfBoats = new ArrayList();
+    ArrayList<Boat> sunkenBoats = new ArrayList();
     BoatDestroyer destroyer;
     BoatCruiser cruiser;
     BoatBattleship battleship;
@@ -237,6 +238,7 @@ public class Player {
             opponentGrid.toggleSquare(x, y);
             recolor(opponentGrid, opponentListOfButtons);
             checkDamage();
+            System.out.println("hit");
         } else {
             System.out.println("miss");
         }
@@ -246,7 +248,7 @@ public class Player {
     public void checkDamage() {
         for (int i = 0; i < listOfBoats.size(); i++) {
             if ((listOfBoats.get(i).checkIfSunk()) && !(listOfBoats.get(i).sunk)) {
-                listOfBoats.get(i).sunk = true;
+                listOfBoats.get(i).setSunk();
                 System.out.println("you sunk a ship");
             }
         }

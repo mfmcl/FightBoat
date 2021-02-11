@@ -16,5 +16,13 @@ public class Main {
         p1.createGameWindow();
         p2.createGameWindow();
 
+        System.out.println("debug");
+        System.out.println("debug");
+        System.out.println("debug");
+        System.out.println("debug");
+        System.out.println("debug");
+        System.out.println("debug");
+        System.out.println("debug");
+        System.out.println("debug");
     }
 }

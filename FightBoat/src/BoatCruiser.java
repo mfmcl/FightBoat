@@ -4,6 +4,7 @@ public class BoatCruiser extends Boat {
 
     BoatCruiser(Grid grid, int xInitial, int yInitial, boolean horizontal) {
         super(grid, xInitial, yInitial, horizontal);
+        boatSize = 3;
     }
 
     // true if all squares for placing boat are false
