@@ -46,15 +46,4 @@ public class Grid {
         }
         System.out.println();
     }
-
-    public static void main(String[] args) {
-        Grid grid = new Grid(8);
-        Boat a = new BoatBattleship(grid, 5, 1, true);
-        Boat b = new BoatCarrier(grid, 2, 1);
-        a.placeBoat();
-        b.placeBoat();
-
-        grid.printGrid();
-
-    }
 }

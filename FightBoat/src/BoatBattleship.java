@@ -1,7 +1,5 @@
 package FightBoat.src;
 
-import javax.xml.namespace.QName;
-
 public class BoatBattleship extends Boat {
 
     BoatBattleship(Grid grid, int xInitial, int yInitial, boolean horizontal) {
