@@ -28,7 +28,7 @@ public class Boat {
     // returns true if values of all potential squares for boat placement are 0
     // 0 means there is no boat on this square
     public boolean allBoat() {
-        // defined separately for each boat
+        // defined separately for each boat type
         return false;
     }
 
@@ -53,12 +53,9 @@ public class Boat {
         }
     }
 
-    // // checks if a boat sunk (if all boat squares are false, a boat is sunk)
-    // public boolean checkIfSunk() {
-    //     return (!(grid.getSquare(xInitial, yInitial)));
-    // }
-
-    public void setSunk() {
-        sunk = true;
+    // checks if a boat is sunk (a bot is sunk if value of all boat squares is 9)
+    public boolean checkIfSunk() {
+        // defined separately for each boat type
+        return false;
     }
 }

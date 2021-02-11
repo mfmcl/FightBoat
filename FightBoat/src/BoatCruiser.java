@@ -13,8 +13,8 @@ public class BoatCruiser extends Boat {
         return square(0) == 0 && square(1) == 0 && square(2) == 0;        
     }
 
-    // @Override
-    // public boolean checkIfSunk() {
-    //     return !square(0) && !square(1) && !square(2);
-    // }
+    @Override
+    public boolean checkIfSunk() {
+        return square(0) == 6 && square(1) == 6 && square(2) == 6;        
+    }
 }

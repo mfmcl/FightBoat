@@ -35,8 +35,8 @@ public class BoatCarrier extends Boat {
         placed = true;
     }
 
-    // @Override
-    // public boolean checkIfSunk() {
-    //     return !square(0) && !square(1) && !square(2) && !square(3);
-    // }
+    @Override
+    public boolean checkIfSunk() {
+        return square(0) == 6 && square(1) == 6 && square(2) == 6 && square(3) == 6;        
+    }
 }
