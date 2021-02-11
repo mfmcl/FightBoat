@@ -46,7 +46,7 @@ public class Player {
         boatsPlaced = 0;
     }
 
-    // sets opponent to our plaeyr
+    // sets opponent to this plaeyr
     // NOTE: cannot appear in constructor, because the opponent might
     // not yet have been created at the time the player is being created
     public void setOpponent(Player opponent) {
@@ -69,7 +69,7 @@ public class Player {
         gridLabel2.setForeground(Color.RED);
 
         instructions = new JTextArea(
-                " 1. Place your destroyer (2x1)\n 2. Place your cruiser (3x1)\n 3. Place your battleship (4x1)\n 4. Place your aircraft carrier (2x2)");
+            " 1. Place your destroyer (2x1)\n 2. Place your cruiser (3x1)\n 3. Place your battleship (4x1)\n 4. Place your aircraft carrier (2x2)");
         instructions.setFont(font);
         instructions.setBackground(Color.DARK_GRAY);
         instructions.setForeground(Color.WHITE);
@@ -88,8 +88,8 @@ public class Player {
         frame.setVisible(true);
     }
 
-    // creates a button (a basic unit of the playing grid) and places it to a list
-    // of buttons for later acruiseress
+    // creates a button (a basic unit of the playing grid)
+    // and adds it to a list of buttons for later access
     public JButton createGridButton(final int x, final int y, ArrayList<JButton> whichList) {
         final JButton buttonOfGrid = new JButton();
         buttonOfGrid.addActionListener(new ActionListener() {
@@ -116,7 +116,6 @@ public class Player {
     // adds buttons to list for easier access
     // separate from createOpponentGrid() for sake of clarity and easier usage
     // (no need to specify extra arguments)
-
     public void createPlayerGrid() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -158,7 +157,7 @@ public class Player {
         if (boatsPlaced < 3) {
             JFrame decision = new JFrame();
             JPanel decisionP = new JPanel();
-            JLabel decisionL = new JLabel("How would you like to place your ship?");
+            JLabel decisionL = new JLabel("How would you like to place your boat?");
     
             JButton horizontally = new JButton("Horizontally");
             horizontally.setBounds(10, 40, 120, 25);
@@ -285,7 +284,7 @@ public class Player {
         for (int i = 0; i < listOfBoats.size(); i++) {
             if (listOfBoats.get(i).checkIfSunk() && !(listOfBoats.get(i).sunk)) {
                 listOfBoats.get(i).sunk = true;
-                System.out.println("you sunk a ship");
+                System.out.println("you sunk a boat");
 
             }
         }
