@@ -37,6 +37,6 @@ public class BoatCarrier extends Boat {
 
     @Override
     public boolean checkIfSunk() {
-        return square(0) == 6 && square(1) == 6 && square(2) == 6 && square(3) == 6;        
+        return square(0) == 6 && square(1) == 6 && square(2) == 6 && square(3) == 6;
     }
 }

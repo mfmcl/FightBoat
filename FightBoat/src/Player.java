@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +37,6 @@ public class Player {
     Player opponent;
     Font font = new Font("Comic Sans MS", Font.BOLD, 12);
 
-
     public Player(String playerName, int gridSize) {
         this.playerName = playerName;
         this.gridSize = gridSize;
@@ -49,7 +47,8 @@ public class Player {
     }
 
     // sets opponent to our plaeyr (cannot appear in constructor, because the
-    // opponent might not yet have been created at the time the player is being created)
+    // opponent might not yet have been created at the time the player is being
+    // created)
     public void setOpponent(Player opponent) {
         this.opponent = opponent;
     }
@@ -76,7 +75,7 @@ public class Player {
 
         frame.setSize(800, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         frame.add(panel);
         panel.setBackground(Color.DARK_GRAY);
 
@@ -272,7 +271,7 @@ public class Player {
     public void checkDamage() {
         for (int i = 0; i < listOfBoats.size(); i++) {
             if (listOfBoats.get(i).checkIfSunk() && !(listOfBoats.get(i).sunk)) {
-                listOfBoats.get(i).sunk = true;  
+                listOfBoats.get(i).sunk = true;
                 System.out.println("you sunk a ship");
 
             }

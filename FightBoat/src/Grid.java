@@ -17,7 +17,7 @@ public class Grid {
     public void setSquare(int x, int y, int n) {
         grid[x][y] = n;
     }
-    
+
     // returns value of grid[x][y]
     public int getSquare(int x, int y) {
         return grid[x][y];
@@ -26,16 +26,8 @@ public class Grid {
     // returns true of value of square at grid[x][y] is 0
     // 0 means there is no boat on this square
     public boolean checkFree(int x, int y) {
-        if (grid[x][y] == 0) {
-            return true;            
-        } else {
-            return false;
-        }
+        return (grid[x][y] == 0);
     }
-
-    // public boolean[][] getGrid() {
-    //     return grid;
-    // }
 
     // for debugging
 
@@ -63,6 +55,6 @@ public class Grid {
         b.placeBoat();
 
         grid.printGrid();
-        
+
     }
 }

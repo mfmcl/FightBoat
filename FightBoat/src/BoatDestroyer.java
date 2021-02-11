@@ -10,11 +10,11 @@ public class BoatDestroyer extends Boat {
     @Override
     // true if all squares for placing boat are false
     public boolean allBoat() {
-        return square(0) == 0 && square(1) == 0;        
+        return square(0) == 0 && square(1) == 0;
     }
 
     @Override
     public boolean checkIfSunk() {
-        return square(0) == 6 && square(1) == 6;        
+        return square(0) == 6 && square(1) == 6;
     }
 }
