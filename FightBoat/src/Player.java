@@ -27,29 +27,21 @@ public class Player {
     ArrayList<JButton> opponentListOfButtons = new ArrayList();
     ArrayList<Boat> listOfBoats = new ArrayList();
     ArrayList<Boat> sunkenBoats = new ArrayList();
-    BoatDestroyer destroyer;
-    BoatCruiser cruiser;
-    BoatBattleship battleship;
-    BoatCarrier carrier;
+    Boat destroyer;
+    Boat cruiser;
+    Boat battleship;
+    Boat carrier;
     int x;
     int y;
     int boatsPlaced;
+    int score = 0;
     Player opponent;
+    Font font = new Font("Comic Sans MS", Font.BOLD, 12);
+
 
     public Player(String playerName, int gridSize) {
         this.playerName = playerName;
         this.gridSize = gridSize;
-
-        frame = new JFrame(playerName);
-        panel = new JPanel();
-        panel.setBackground(Color.white);
-
-        gridLabel1 = new JLabel("Your field");
-        gridLabel2 = new JLabel("Opponent's field");
-
-        instructions = new JTextArea(
-                " 1. Place your destroyer (2x1)\n 2. Place your cruiser (3x1)\n 3. Place your battleship (4x1)\n 4. Place your aircraft carrier (2x2)");
-        instructions.setEditable(false);
 
         playerGrid = new Grid(gridSize);
         opponentGrid = new Grid(gridSize);
@@ -57,17 +49,36 @@ public class Player {
     }
 
     // sets opponent to our plaeyr (cannot appear in constructor, because the
-    // opponent might not yet have been created at the time the player is being
-    // created)
+    // opponent might not yet have been created at the time the player is being created)
     public void setOpponent(Player opponent) {
         this.opponent = opponent;
     }
 
     // creates game window for a player
     public void createGameWindow() {
+        frame = new JFrame(playerName);
+        panel = new JPanel();
+        panel.setBackground(Color.white);
+
+        gridLabel1 = new JLabel("Your field \t Score: " + score);
+        gridLabel1.setFont(font);
+        gridLabel1.setForeground(Color.YELLOW);
+        gridLabel2 = new JLabel("Opponent's field \t Score: " + opponent.score);
+        gridLabel2.setFont(font);
+        gridLabel2.setForeground(Color.RED);
+
+        instructions = new JTextArea(
+                " 1. Place your destroyer (2x1)\n 2. Place your cruiser (3x1)\n 3. Place your battleship (4x1)\n 4. Place your aircraft carrier (2x2)");
+        instructions.setFont(font);
+        instructions.setBackground(Color.DARK_GRAY);
+        instructions.setForeground(Color.WHITE);
+        instructions.setEditable(false);
+
         frame.setSize(800, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         frame.add(panel);
+        panel.setBackground(Color.DARK_GRAY);
 
         createPlayerGrid();
         createOpponentGrid();
@@ -218,10 +229,16 @@ public class Player {
     public void recolor(Grid whichGrid, ArrayList<JButton> whichList) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-                if (whichGrid.getSquare(j, i)) {
-                    getGridButton(j, i, whichList).setBackground(Color.gray);
+                if (whichGrid.getSquare(j, i) == 0) {
+                    getGridButton(j, i, whichList).setBackground(Color.GRAY);
+                } else if (whichGrid.getSquare(j, i) == 6) {
+                    getGridButton(j, i, whichList).setBackground(Color.RED);
+                } else if (whichGrid.getSquare(j, i) == 7) {
+                    getGridButton(j, i, whichList).setBackground(Color.LIGHT_GRAY);
+                } else if (whichGrid.getSquare(j, i) == 9) {
+                    getGridButton(j, i, whichList).setBackground(Color.BLACK);
                 } else {
-                    getGridButton(j, i, whichList).setBackground(Color.cyan);
+                    getGridButton(j, i, whichList).setBackground(Color.WHITE);
                 }
             }
 
@@ -231,15 +248,22 @@ public class Player {
     // allows a player to attack a certain square (through a button, as mentioned
     // above)
     public void attack(int x, int y) {
-        boolean wasHit = opponent.playerGrid.getSquare(x, y);
+        boolean wasHit = !(opponent.playerGrid.getSquare(x, y) == 0 || opponent.playerGrid.getSquare(x, y) == 6);
         if (wasHit) {
-            opponent.playerGrid.toggleSquare(x, y);
+            opponent.playerGrid.setSquare(x, y, 6);
             opponent.recolor(opponent.playerGrid, opponent.playerListOfButtons);
-            opponentGrid.toggleSquare(x, y);
+            opponentGrid.setSquare(x, y, 6);
             recolor(opponentGrid, opponentListOfButtons);
-            checkDamage();
+            opponent.checkDamage();
+            score++;
+            gridLabel1.setText("Your field \t Score: " + score);
+            gridLabel2.setText("Opponent's field \t Score: " + opponent.score);
+            opponent.gridLabel1.setText("Your field \t Score: " + opponent.score);
+            opponent.gridLabel2.setText("Opponent's field \t Score: " + score);
             System.out.println("hit");
         } else {
+            opponentGrid.setSquare(x, y, 7);
+            recolor(opponentGrid, opponentListOfButtons);
             System.out.println("miss");
         }
     }
@@ -247,9 +271,10 @@ public class Player {
     // checks if a boat has just been sunk
     public void checkDamage() {
         for (int i = 0; i < listOfBoats.size(); i++) {
-            if ((listOfBoats.get(i).checkIfSunk()) && !(listOfBoats.get(i).sunk)) {
-                listOfBoats.get(i).setSunk();
+            if (listOfBoats.get(i).checkIfSunk() && !(listOfBoats.get(i).sunk)) {
+                listOfBoats.get(i).sunk = true;  
                 System.out.println("you sunk a ship");
+
             }
         }
     }

@@ -8,25 +8,28 @@ public class BoatCarrier extends Boat {
     }
 
     @Override
-    public boolean square(int i) {
+    public int square(int i) {
         if (i < 2)
             return grid.getSquare(xInitial + i, yInitial);
         else
             return grid.getSquare(xInitial + (i - 2), yInitial + 1);
     }
 
+    @Override
     // true if all squares for placing boat are false
     public boolean allBoat() {
-        return !square(0) && !square(1) && !square(2) && !square(3);
+        return square(0) == 0 && square(1) == 0 && square(2) == 0 && square(3) == 0;
     }
 
     @Override
     public void placeBoat() {
-        if (placed || !allBoat())
+        if (placed || !allBoat()) {
+            System.out.println("cannot place boat");
             return;
+        }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                grid.toggleSquare(xInitial + i, yInitial + j);
+                grid.setSquare(xInitial + i, yInitial + j, 5);
             }
         }
         placed = true;
@@ -34,6 +37,6 @@ public class BoatCarrier extends Boat {
 
     @Override
     public boolean checkIfSunk() {
-        return !square(0) && !square(1) && !square(2) && !square(3);
+        return square(0) == 6 && square(1) == 6 && square(2) == 6 && square(3) == 6;        
     }
 }

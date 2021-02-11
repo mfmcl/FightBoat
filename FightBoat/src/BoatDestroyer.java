@@ -7,28 +7,14 @@ public class BoatDestroyer extends Boat {
         boatSize = 2;
     }
 
+    @Override
     // true if all squares for placing boat are false
     public boolean allBoat() {
-        return !square(0) && !square(1);
-    }
-
-    @Override
-    public void placeBoat() {
-        if (placed || !allBoat())
-            return;
-        if (horizontal) {
-            for (int i = 0; i < 2; i++) {
-                grid.toggleSquare((xInitial + i), yInitial);
-            }
-        } else {
-            for (int i = 0; i < 2; i++) {
-                grid.toggleSquare((xInitial), yInitial + i);
-            }
-        }
+        return square(0) == 0 && square(1) == 0;        
     }
 
     @Override
     public boolean checkIfSunk() {
-        return (!(square(0)) && !(square(1)));
+        return square(0) == 6 && square(1) == 6;        
     }
 }
