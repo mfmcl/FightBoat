@@ -10,7 +10,6 @@ public class Boat {
     boolean placed = false;
     boolean sunk = false;
 
-
     public Boat(Grid grid, int xInitial, int yInitial, boolean horizontal) {
         this.grid = grid;
         this.xInitial = xInitial;
@@ -18,25 +17,46 @@ public class Boat {
         this.horizontal = horizontal;
     }
 
-    public boolean square(int i) {
+    // returns value of boat square with index i
+    public int square(int i) {
         if (horizontal)
             return grid.getSquare(xInitial + i, yInitial);
         else
             return grid.getSquare(xInitial, yInitial + i);
     }
 
-    // a bunch of useless never used methods which are here merely for the sake of
-    // demonstrating what these methods should be capable of doing in extensions
+    // returns true if values of all potential squares for boat placement are 0
+    // 0 means there is no boat on this square
+    public boolean allBoat() {
+        // defined separately for each boat
+        return false;
+    }
 
-    // places a boat only if the space is free
+    // places boat by changing values of all boat squares
+    // places boat in correct orientation
+    // places boat only if it is possible
     public void placeBoat() {
-        // 
+        if (placed || !allBoat()) {
+            System.out.println("cannot place boat");
+            return;
+        }
+        if (horizontal) {
+            for (int i = 0; i < boatSize; i++) {
+                grid.setSquare((xInitial + i), yInitial, boatSize);
+                placed = true;
+            }
+        } else {
+            for (int i = 0; i < boatSize; i++) {
+                grid.setSquare((xInitial), yInitial + i, boatSize);
+                placed = true;
+            }
+        }
     }
 
-    // checks if a boat sunk (if all boat squares are false, a boat is sunk)
-    public boolean checkIfSunk() {
-        return (!(grid.getSquare(xInitial, yInitial)));
-    }
+    // // checks if a boat sunk (if all boat squares are false, a boat is sunk)
+    // public boolean checkIfSunk() {
+    //     return (!(grid.getSquare(xInitial, yInitial)));
+    // }
 
     public void setSunk() {
         sunk = true;

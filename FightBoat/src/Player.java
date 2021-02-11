@@ -35,6 +35,8 @@ public class Player {
     int y;
     int boatsPlaced;
     Player opponent;
+    Font font = new Font("Comic Sans MS", Font.BOLD, 12);
+
 
     public Player(String playerName, int gridSize) {
         this.playerName = playerName;
@@ -45,10 +47,17 @@ public class Player {
         panel.setBackground(Color.white);
 
         gridLabel1 = new JLabel("Your field");
+        gridLabel1.setFont(font);
+        gridLabel1.setForeground(Color.YELLOW);
         gridLabel2 = new JLabel("Opponent's field");
+        gridLabel2.setFont(font);
+        gridLabel2.setForeground(Color.RED);
 
         instructions = new JTextArea(
                 " 1. Place your destroyer (2x1)\n 2. Place your cruiser (3x1)\n 3. Place your battleship (4x1)\n 4. Place your aircraft carrier (2x2)");
+        instructions.setFont(font);
+        instructions.setBackground(Color.DARK_GRAY);
+        instructions.setForeground(Color.WHITE);
         instructions.setEditable(false);
 
         playerGrid = new Grid(gridSize);
@@ -57,8 +66,7 @@ public class Player {
     }
 
     // sets opponent to our plaeyr (cannot appear in constructor, because the
-    // opponent might not yet have been created at the time the player is being
-    // created)
+    // opponent might not yet have been created at the time the player is being created)
     public void setOpponent(Player opponent) {
         this.opponent = opponent;
     }
@@ -67,7 +75,9 @@ public class Player {
     public void createGameWindow() {
         frame.setSize(800, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         frame.add(panel);
+        panel.setBackground(Color.DARK_GRAY);
 
         createPlayerGrid();
         createOpponentGrid();
@@ -218,10 +228,12 @@ public class Player {
     public void recolor(Grid whichGrid, ArrayList<JButton> whichList) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-                if (whichGrid.getSquare(j, i)) {
-                    getGridButton(j, i, whichList).setBackground(Color.gray);
+                if (whichGrid.getSquare(j, i) == 0) {
+                    getGridButton(j, i, whichList).setBackground(Color.GRAY);
+                } else if (whichGrid.getSquare(j, i) == 9) {
+                    getGridButton(j, i, whichList).setBackground(Color.RED);
                 } else {
-                    getGridButton(j, i, whichList).setBackground(Color.cyan);
+                    getGridButton(j, i, whichList).setBackground(Color.WHITE);
                 }
             }
 
@@ -231,11 +243,11 @@ public class Player {
     // allows a player to attack a certain square (through a button, as mentioned
     // above)
     public void attack(int x, int y) {
-        boolean wasHit = opponent.playerGrid.getSquare(x, y);
+        boolean wasHit = !(opponent.playerGrid.getSquare(x, y) == 0 || opponent.playerGrid.getSquare(x, y) == 9);
         if (wasHit) {
-            opponent.playerGrid.toggleSquare(x, y);
+            opponent.playerGrid.setSquare(x, y, 9);
             opponent.recolor(opponent.playerGrid, opponent.playerListOfButtons);
-            opponentGrid.toggleSquare(x, y);
+            opponentGrid.setSquare(x, y, 9);
             recolor(opponentGrid, opponentListOfButtons);
             checkDamage();
             System.out.println("hit");
